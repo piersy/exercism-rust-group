@@ -7,10 +7,18 @@ pub struct Clock {
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         let extra_hours = minutes / 60;
-        let hours = hours + extra_hours;
+        let mut hours = (hours + extra_hours) % 24;
+        if hours < 0 {
+            hours = hours + 24;
+        }
+        let mut minutes = minutes % 60;
+        if minutes < 0 {
+            minutes = minutes + 60;
+        }
+
         Clock {
-            hours: hours % 24,
-            minutes: minutes % 60,
+            hours: hours,
+            minutes: minutes,
         }
     }
 
