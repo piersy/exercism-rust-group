@@ -9,7 +9,7 @@ pub struct Clock {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let minutes_effect_on_hours = minutes / 60 - if minutes < 0 && minutes % 60 < 0 { 1 } else { 0 };
+        let minutes_effect_on_hours = minutes / 60 + if minutes < 0 && minutes % 60 < 0 { -1 } else { 0 };
         let normalized_hours: u32 = (((hours + minutes_effect_on_hours) % 24 + 24) % 24) as u32;
         let normalized_minutes: u32 = (((minutes % 60) + 60) % 60) as u32;
 
