@@ -4,7 +4,7 @@ use std::fmt;
 #[derive(PartialEq)]
 #[derive(Debug)]
 pub struct Clock {
-    pub time: NaiveTime,
+    time: NaiveTime,
 }
 
 impl Clock {
