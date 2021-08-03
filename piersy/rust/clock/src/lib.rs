@@ -52,16 +52,12 @@ const HOURS_IN_DAY: i32 = 24;
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let mut extra_hours = minutes / MINUTES_IN_HOUR;
-        let mut minutes = minutes % MINUTES_IN_HOUR;
-        if minutes < 0 {
-            minutes = minutes + MINUTES_IN_HOUR;
-            extra_hours = extra_hours - 1;
-        }
-        let mut hours = (hours + extra_hours) % HOURS_IN_DAY;
-        if hours < 0 {
-            hours = hours + HOURS_IN_DAY;
-        }
+        // Collect everything into minutes
+        let mut minutes = minutes + (hours * MINUTES_IN_HOUR);
+        // Get hours
+        let hours = minutes.div_euclid(MINUTES_IN_HOUR).rem_euclid(HOURS_IN_DAY);
+        // Get remaining minutes
+        minutes = minutes.rem_euclid(MINUTES_IN_HOUR);
 
         Clock {
             hours: hours,
