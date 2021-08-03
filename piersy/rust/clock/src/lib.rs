@@ -46,18 +46,21 @@ pub struct Clock {
     hours: i32,
     minutes: i32,
 }
+// Instead of using the magic numbers it might be considered to use consts with meaningful names.
+const MINUTES_IN_HOUR: i32 = 60;
+const HOURS_IN_DAY: i32 = 24;
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        let mut extra_hours = minutes / 60;
-        let mut minutes = minutes % 60;
+        let mut extra_hours = minutes / MINUTES_IN_HOUR;
+        let mut minutes = minutes % MINUTES_IN_HOUR;
         if minutes < 0 {
-            minutes = minutes + 60;
+            minutes = minutes + MINUTES_IN_HOUR;
             extra_hours = extra_hours - 1;
         }
-        let mut hours = (hours + extra_hours) % 24;
+        let mut hours = (hours + extra_hours) % HOURS_IN_DAY;
         if hours < 0 {
-            hours = hours + 24;
+            hours = hours + HOURS_IN_DAY;
         }
 
         Clock {
@@ -75,7 +78,7 @@ impl Clock {
 // ToString shouldn't be implemented directly: Display should be implemented instead, and you get the
 // ToString implementation for free.
 //
-// Note that I'm using the same format call to format the results.
+// Note that I'm using the same format call to format the data.
 impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = format!("{:02}:{:02}", self.hours, self.minutes);
