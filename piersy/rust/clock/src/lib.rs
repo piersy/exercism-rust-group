@@ -77,7 +77,6 @@ impl Clock {
 // Note that I'm using the same format call to format the data.
 impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = format!("{:02}:{:02}", self.hours, self.minutes);
-        write!(f, "{}", s)
+        write!(f, "{:02}:{:02}", self.hours, self.minutes)
     }
 }
