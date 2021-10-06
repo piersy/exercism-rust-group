@@ -134,6 +134,12 @@ fn test_graph_stores_attributes() {
             .collect::<Vec<_>>(),
     );
 
+    // let a = graph
+    //     .get_node("c")
+    //     .expect("node must be stored")
+    //     .get_attr("bim")
+    // let b = Some("bef")
+
     assert_eq!(
         graph
             .get_node("c")

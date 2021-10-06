@@ -3,7 +3,7 @@ pub mod graph {
     pub struct Graph<'a> {
         pub nodes: Vec<graph_items::node::Node<'a>>,
         pub edges: Vec<graph_items::edge::Edge<'a>>,
-        pub attrs: HashMap<&'a str, &'a str>,
+        pub attrs: HashMap<String, String>,
     }
 
     impl<'a> Graph<'a> {
@@ -25,7 +25,7 @@ pub mod graph {
         }
         pub fn with_attrs(mut self, attrs: &[(&'a str, &'a str)]) -> Self {
             for (k, v) in attrs {
-                self.attrs.insert(k, v);
+                self.attrs.insert(k.to_string(), v.to_string());
             }
             self
         }
@@ -47,7 +47,7 @@ pub mod graph {
             pub struct Edge<'a> {
                 start: &'a str,
                 end: &'a str,
-                pub attrs: HashMap<&'a str, &'a str>,
+                pub attrs: HashMap<String, String>,
             }
 
             impl<'a> Edge<'a> {
@@ -60,7 +60,7 @@ pub mod graph {
                 }
                 pub fn with_attrs(mut self, attrs: &[(&'a str, &'a str)]) -> Self {
                     for (k, v) in attrs {
-                        self.attrs.insert(k, v);
+                        self.attrs.insert(k.to_string(), v.to_string());
                     }
                     self
                 }
@@ -71,7 +71,7 @@ pub mod graph {
             #[derive(Clone, Eq, PartialEq, Debug)]
             pub struct Node<'a> {
                 pub v: &'a str,
-                pub attrs: HashMap<&'a str, &'a str>,
+                pub attrs: HashMap<String, String>,
             }
             impl<'a> Node<'a> {
                 pub fn new(v: &'a str) -> Self {
@@ -82,11 +82,11 @@ pub mod graph {
                 }
                 pub fn with_attrs(mut self, attrs: &[(&'a str, &'a str)]) -> Self {
                     for (k, v) in attrs {
-                        self.attrs.insert(k, v);
+                        self.attrs.insert(k.to_string(), v.to_string());
                     }
                     self
                 }
-                pub fn get_attr(&self, name: &str) -> Option<&&'a str> {
+                pub fn get_attr(&self, name: &str) -> Option<&String> {
                     self.attrs.get(name)
                 }
             }
