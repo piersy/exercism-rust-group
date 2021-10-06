@@ -86,8 +86,11 @@ pub mod graph {
                     }
                     self
                 }
-                pub fn get_attr(&self, name: &str) -> Option<&String> {
-                    self.attrs.get(name)
+                pub fn get_attr(&self, name: &str) -> Option<&str> {
+                    match self.attrs.get(name) {
+                        Some(v) => Some(&v[..]),
+                        None => None,
+                    }
                 }
             }
         }
